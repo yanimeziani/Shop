@@ -4,7 +4,7 @@ include 'includes/header.php';
 ?>
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
             <h1 class="text-center"><?php echo $_GET["product_name"] ?>.</h1>
         </div>

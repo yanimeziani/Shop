@@ -15,7 +15,7 @@ include 'includes/header.php';
         </div>
 
         <div class="container">
-            <div class="row m-5">
+            <div class="row">
                 <?php
                 $productDAO = new ProductDAO($conn);
                 $products = $productDAO->getAllProducts();
