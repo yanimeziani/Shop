@@ -1,12 +1,42 @@
 <?php
+
+require_once 'db/db.php';
+require_once 'includes/userDAO.class.php';
+
 include 'includes/head.php';
 include 'includes/header.php';
+
+$error = "";
+if (isset($_POST["email"]) && isset($_POST["password"])) {
+    if (!empty(trim($_POST["email"])) && !empty($_POST["password"])) {
+        $userDAO = new UserDAO($conn);
+        $user = $userDAO->getUserByEmail($_POST["email"]);
+        if ($user) {
+            if (password_verify($_POST["password"], $user->getPassword())) {
+                $_SESSION["user"] = $user;
+                header("Location: index.php");
+                session_start();
+                $_SESSION["email"] = $user->getEmail();
+            } else {
+                $error = "Le mot de passe est incorrect.";
+            }
+        } else {
+            $error = "L'adresse courriel n'existe pas.";
+        }
+    } else {
+        $error = "Veuillez remplir tous les champs.";
+    }
+}
+
 ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
+        <div class="col-md-12 gradient-1 text-light pt-1">
             <h1 class="text-center">Se connecter.</h1>
         </div>
+        <?php if (strlen($error) > 0) { ?>
+            <div class='col-md-12 alert alert-danger text-center'><?php echo $error; ?></div>
+        <?php } ?>
 
         <form class="col-md-4 mx-auto mt-4" method="POST" action="connexion.php">
             <div class="form-group">
