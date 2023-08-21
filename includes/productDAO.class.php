@@ -1,5 +1,7 @@
 <?php
+
 require_once 'includes/product.class.php';
+
 class ProductDAO
 {
     private $db;
@@ -12,8 +14,15 @@ class ProductDAO
     public function insertProduct(Product $product)
     {
         try {
-            $stmt = $this->db->prepare("INSERT INTO products (sku, name, description, price, stock) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$product->getSKU(), $product->getName(), $product->getDescription(), $product->getPrice(), $product->getStock()]);
+            $req = $this->db->prepare("INSERT INTO products (sku, name, description, price, stock) VALUES (:sku, :name, :description, :price, :stock)");
+            $params = [
+                ':sku' => $product->getSKU(),
+                ':name' => $product->getName(),
+                ':description' => $product->getDescription(),
+                ':price' => $product->getPrice(),
+                ':stock' => $product->getStock()
+            ];
+            $req->execute($params);
             return true;
         } catch (PDOException $e) {
             echo "Insert failed: " . $e->getMessage();
@@ -24,9 +33,10 @@ class ProductDAO
     public function getProductBySKU($sku)
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM products WHERE sku = ?");
-            $stmt->execute([$sku]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $req = $this->db->prepare("SELECT * FROM products WHERE sku = :sku");
+            $params = [':sku' => $sku];
+            $req->execute($params);
+            $result = $req->fetch(PDO::FETCH_ASSOC);
             if ($result) {
                 return new Product($result['sku'], $result['name'], $result['description'], $result['price'], $result['stock']);
             } else {
@@ -41,8 +51,8 @@ class ProductDAO
     public function getAllProducts()
     {
         try {
-            $stmt = $this->db->query("SELECT * FROM products");
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $req = $this->db->query("SELECT * FROM products");
+            $results = $req->fetchAll(PDO::FETCH_ASSOC);
 
             $products = [];
             foreach ($results as $result) {
