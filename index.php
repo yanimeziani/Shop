@@ -1,8 +1,9 @@
 <?php
-include 'includes/head.php';
 require_once 'db/db.php';
-require_once 'includes/product.class.php';
 require_once 'includes/productDAO.class.php';
+
+include 'includes/head.php';
+
 ?>
 
 <?php
@@ -13,7 +14,7 @@ include 'includes/header.php';
         <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
             <h1 class="text-center">Produits.</h1>
         </div>
-        <div class="col-md-12 bg-dark text-light mb-2" style="margin-top: -8px;">
+        <div class="col-md-12 bg-dark text-light mb-2 pt-2" style="margin-top: -8px;">
             <p class="text-center">Livraison gratuite en tout temps.</p>
         </div>
 

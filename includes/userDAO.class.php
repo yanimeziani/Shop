@@ -29,11 +29,11 @@ class UserDAO
         }
     }
 
-    public function getUserById($id)
+    public function getUserByEmail($email)
     {
-        $req = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $req = $this->db->prepare("SELECT * FROM users WHERE email = :email");
 
-        $params = [':id' => $id];
+        $params = [':email' => $email];
         $req->execute($params);
 
         $result = $req->fetch(PDO::FETCH_ASSOC);
