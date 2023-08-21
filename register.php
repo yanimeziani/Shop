@@ -36,6 +36,10 @@ include 'includes/header.php';
                 <label for="password2">Mot de passe (Confirmation)</label>
                 <input type="password" class="form-control" id="password2" name="password2" placeholder="Votre mot de passe">
             </div>
+            <div class="form-group mb-2">
+                <label for="password2">Mot de passe (Confirmation)</label>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Votre mot de passe">
+            </div>
             <button type="submit" class="btn btn-primary float-end">S'inscrire</button>
         </form>
     </div>
