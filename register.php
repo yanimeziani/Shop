@@ -36,7 +36,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 gradient-1 text-light pt-1">
-            <h1 class="text-center">S'inscrire.</h1>
+            <h1 class="text-center">S'inscrire</h1>
         </div>
         <?php if (strlen($error) > 0) { ?>
             <div class='col-md-12 alert alert-danger text-center'><?php echo $error; ?></div>
