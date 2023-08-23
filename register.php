@@ -10,22 +10,28 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
         !empty(trim($_POST["firstname"])) &&
         !empty(trim($_POST["lastname"])) &&
         !empty(trim($_POST["email"])) &&
-        !empty($_POST["password"]) && // Assuming password can't be only whitespace
-        !empty($_POST["password2"]) && // Assuming password2 can't be only whitespace
+        !empty($_POST["password"]) &&
+        !empty($_POST["password2"]) &&
         !empty(trim($_POST["address"]))
     ) {
-        $userDAO = new UserDAO($conn);
-        if (!$userDAO->userExists($_POST["email"])) {
-            if ($_POST["password"] == $_POST["password2"]) {
-                $userDAO = new UserDAO($conn);
-                $user = new User(null, $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["firstname"], $_POST["lastname"], $_POST["address"]);
-                $userDAO->createUser($user);
-                header("Location: connexion.php");
+        if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+
+            $userDAO = new UserDAO($conn);
+            if (!$userDAO->userExists($_POST["email"])) {
+                if ($_POST["password"] == $_POST["password2"]) {
+                    $userDAO = new UserDAO($conn);
+                    $user = new User(null, $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["firstname"], $_POST["lastname"], $_POST["address"]);
+                    $userDAO->createUser($user);
+                    header("Location: connexion.php");
+                    exit();
+                } else {
+                    $error = "Les mots de passe ne correspondent pas.";
+                }
             } else {
-                $error = "Les mots de passe ne correspondent pas.";
+                $error = "L'adresse courriel existe déjà.";
             }
         } else {
-            $error = "L'adresse courriel existe déjà.";
+            $error = "L'adresse courriel n'est pas valide.";
         }
     } else {
         $error = "Veuillez remplir tous les champs.";

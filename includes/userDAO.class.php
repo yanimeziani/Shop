@@ -65,11 +65,11 @@ class UserDAO
         }
     }
 
-    public function deleteUser($id)
+    public function deleteUser($email)
     {
-        $req = $this->db->prepare("DELETE FROM users WHERE id = :id");
+        $req = $this->db->prepare("DELETE FROM users WHERE email = :email");
 
-        $params = [':id' => $id];
+        $params = [':email' => $email];
 
         if ($req->execute($params)) {
             return true;
