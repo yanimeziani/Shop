@@ -15,7 +15,7 @@ include 'includes/header.php';
             <p class="text-center">Aucun remboursement possible !</p>
         </div>
         <?php if (isset($_GET["message"])) { ?>
-            <div class='col-md-12 alert alert-success text-center'><?php echo $_GET["message"]; ?></div>
+            <div class='col-md-12 alert alert-info text-center'><?php echo $_GET["message"]; ?></div>
         <?php } ?>
 
         <div class="container mt-2 px-5"">
