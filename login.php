@@ -1,7 +1,8 @@
 <?php
 
 require_once 'db/db.php';
-require_once 'includes/userDAO.class.php';
+require_once 'class/userDAO.class.php';
+require_once "includes/session.php";
 
 include 'includes/head.php';
 include 'includes/header.php';
@@ -15,7 +16,6 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
             if (password_verify($_POST["password"], $user->getPassword())) {
                 $_SESSION["user"] = $user;
                 header("Location: index.php");
-                session_start();
                 $_SESSION["email"] = $user->getEmail();
             } else {
                 $error = "Le mot de passe est incorrect.";
@@ -39,7 +39,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
             <div class='col-md-12 alert alert-danger text-center'><?php echo $error; ?></div>
         <?php } ?>
 
-        <form class="col-md-4 mx-auto mt-4" method="POST" action="connexion.php">
+        <form class="col-md-4 mx-auto mt-4" method="POST" action="login.php">
             <div class="form-group">
                 <label for="email">Courriel</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Adresse courriel">

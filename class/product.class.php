@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 class Product
 {
     private $sku;
@@ -7,7 +9,7 @@ class Product
     private $price;
     private $stock;
 
-    public function __construct($sku, $name, $description, $price, $stock)
+    public function __construct(int $sku, string $name, string $description, float $price, int $stock)
     {
         $this->sku = $sku;
         $this->name = $name;

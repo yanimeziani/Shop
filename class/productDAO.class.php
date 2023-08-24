@@ -1,6 +1,7 @@
 <?php
 
-require_once 'includes/product.class.php';
+declare(strict_types=1);
+require_once 'class/product.class.php';
 
 class ProductDAO
 {
@@ -30,15 +31,15 @@ class ProductDAO
         }
     }
 
-    public function getProductBySKU($sku)
+    public function getProductBySKU(int $sku): ?Product
     {
         try {
             $req = $this->db->prepare("SELECT * FROM products WHERE sku = :sku");
-            $params = [':sku' => $sku];
+            $params = [':sku' => strval($sku)];
             $req->execute($params);
             $result = $req->fetch(PDO::FETCH_ASSOC);
             if ($result) {
-                return new Product($result['sku'], $result['name'], $result['description'], $result['price'], $result['stock']);
+                return new Product(intval($result['sku']), $result['name'], $result['description'], floatval($result['price']), intval($result['stock']));
             } else {
                 return null;
             }
@@ -56,8 +57,10 @@ class ProductDAO
 
             $products = [];
             foreach ($results as $result) {
-                $product = new Product($result['sku'], $result['name'], $result['description'], $result['price'], $result['stock']);
-                $products[] = $product;
+                if (intval($result['stock']) > 0) {
+                    $product = new Product(intval($result['sku']), $result['name'], $result['description'], floatval($result['price']), intval($result['stock']));
+                    $products[] = $product;
+                }
             }
 
             return $products;

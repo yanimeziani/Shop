@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 class User
 {
     private $id;
@@ -9,7 +10,7 @@ class User
     private $last_name;
     private $shipping_address;
 
-    public function __construct($id, $email, $password, $first_name, $last_name, $shipping_address)
+    public function __construct(int $id, string $email, string $password, string $first_name, string $last_name, string $shipping_address)
     {
         $this->id = $id;
         $this->email = $email;
@@ -49,27 +50,27 @@ class User
         return $this->shipping_address;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
 
-    public function setFirstName($first_name)
+    public function setFirstName(string $first_name)
     {
         $this->first_name = $first_name;
     }
 
-    public function setLastName($last_name)
+    public function setLastName(string $last_name)
     {
         $this->last_name = $last_name;
     }
 
-    public function setShippingAddress($shipping_address)
+    public function setShippingAddress(string $shipping_address)
     {
         $this->shipping_address = $shipping_address;
     }

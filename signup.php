@@ -2,9 +2,10 @@
 require_once 'db/db.php';
 include 'includes/head.php';
 include 'includes/header.php';
-require_once 'includes/userDAO.class.php';
+require_once 'class/userDAO.class.php';
+require_once "includes/session.php";
 $error = "";
-// Inscription
+
 if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["password2"]) && isset($_POST["address"])) {
     if (
         !empty(trim($_POST["firstname"])) &&
@@ -22,7 +23,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
                     $userDAO = new UserDAO($conn);
                     $user = new User(null, $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["firstname"], $_POST["lastname"], $_POST["address"]);
                     $userDAO->createUser($user);
-                    header("Location: connexion.php");
+                    header("Location: login.php");
                     exit();
                 } else {
                     $error = "Les mots de passe ne correspondent pas.";
@@ -47,7 +48,7 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
         <?php if (strlen($error) > 0) { ?>
             <div class='col-md-12 alert alert-danger text-center'><?php echo $error; ?></div>
         <?php } ?>
-        <form class="col-md-4 mx-auto mt-4 " method="POST" action="register.php">
+        <form class="col-md-4 mx-auto mt-4 " method="POST" action="signup.php">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

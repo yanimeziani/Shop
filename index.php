@@ -1,6 +1,7 @@
 <?php
 require_once 'db/db.php';
-require_once 'includes/productDAO.class.php';
+require_once 'class/productDAO.class.php';
+require_once 'includes/session.php';
 
 include 'includes/head.php';
 include 'includes/header.php';
@@ -26,10 +27,11 @@ include 'includes/header.php';
                 $name = $product->getName();
                 $price = $product->getPrice();
                 $img = "img/" . $product->getSKU() . ".jpeg";
+                $sku = $product->getSKU();
             ?>
 
-                <div class="col-md-3 mb-5">
-                    <a href="product.php?<?= "sku=" . $product->getSKU(); ?>">
+                <div class="col-lg-3 col-md-4 mb-5">
+                    <a href="product.php?sku=<?= $sku; ?>">
                         <div class="card border-1">
                             <img src="<?= $img; ?>" class="card-img pt-5" alt="<?= $name; ?>">
                             <div class="card-img-overlay">

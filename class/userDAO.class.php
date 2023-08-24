@@ -1,11 +1,13 @@
 <?php
-include 'includes/user.class.php';
+
+declare(strict_types=1);
+include 'class/user.class.php';
 
 class UserDAO
 {
     private $db;
 
-    public function __construct($conn)
+    public function __construct(PDO $conn)
     {
         $this->db = $conn;
     }
@@ -29,7 +31,7 @@ class UserDAO
         }
     }
 
-    public function getUserByEmail($email)
+    public function getUserByEmail(string $email)
     {
         $req = $this->db->prepare("SELECT * FROM users WHERE email = :email");
 
@@ -65,7 +67,7 @@ class UserDAO
         }
     }
 
-    public function deleteUser($email)
+    public function deleteUser(string $email)
     {
         $req = $this->db->prepare("DELETE FROM users WHERE email = :email");
 
@@ -78,7 +80,7 @@ class UserDAO
         }
     }
 
-    public function userExists($email)
+    public function userExists(string $email)
     {
         $req = $this->db->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
 
