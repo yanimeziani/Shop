@@ -18,7 +18,7 @@ include 'includes/header.php';
             <div class='col-md-12 alert alert-info text-center'><?php echo $_GET["message"]; ?></div>
         <?php } ?>
 
-        <div class="container mt-2 px-5"">
+        <div class="container col-md-11 mt-2 px-5 mx-auto"">
             <div class=" row">
             <?php
             $productDAO = new ProductDAO($conn);
@@ -35,7 +35,7 @@ include 'includes/header.php';
                         <div class="card border-1">
                             <img src="<?= $img; ?>" class="card-img pt-5" alt="<?= $name; ?>">
                             <div class="card-img-overlay">
-                                <h6 class="card-title text-dark"><?= $name; ?> <span class="badge bg-success gradient-1 float-end"><?= $price; ?> $</span></h6>
+                                <h6 class="card-title text-dark"><?= $name; ?> <span class="badge bg-dark float-end"><?= $price; ?> $</span></h6>
                                 <hr>
                             </div>
                         </div>

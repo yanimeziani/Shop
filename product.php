@@ -36,7 +36,7 @@ if (isset($_GET["sku"])) {
                                 <img src="<?= $img; ?>" class="card-img-top rounded" alt="<?= $name; ?>">
                             </div>
                             <div class="col-md-7 p-4">
-                                <h4 class="card-title">Prix: <span class="badge bg-success gradient-1 float-end"><?= $price; ?> $</span> </h4>
+                                <h4 class="card-title">Prix: <span class="badge bg-dark float-end"><?= $price; ?> $</span> </h4>
                                 <hr>
                                 <h6 class="card-text"><?= $description; ?></h6>
 
@@ -48,7 +48,7 @@ if (isset($_GET["sku"])) {
                             </div>
                             <div class="col-md-8">
                                 <input type="hidden" name="sku" id="sku" value="<?= $sku ?>">
-                                <input type="submit" class="btn btn-dark btn-lg mt-3 float-end" value="Ajouter au panier">
+                                <input type="submit" class="btn btn-primary gradient-1 btn-lg mt-3 float-end border-0" value="Ajouter au panier">
                             </div>
 
                         </div>

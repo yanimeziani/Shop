@@ -29,6 +29,10 @@ if (isset($_GET['delete']) && !empty($_GET['delete'])) {
     $_SESSION["cart"] = serialize($cart);
 }
 
+$cart = unserialize($_SESSION["cart"]);
+
+$isCartEmpty = empty($cart->getCartItems());
+
 include 'includes/head.php';
 include 'includes/header.php';
 
@@ -39,49 +43,77 @@ include 'includes/header.php';
         <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
             <h1 class="text-center">Panier</h1>
         </div>
-        <div class="col-md-8 mx-auto mt-3">
+        <div class="col-md-10 mx-auto mt-3">
             <form action="cart.php" method="POST">
                 <table class="table rounded-1">
                     <tbody>
                         <?php
                         $cart = unserialize($_SESSION["cart"]);
                         if (isset($cart) && !empty($cart)) {
-                            foreach ($cart->getCartItems() as $cartItem) {
-                                $product = $cartItem->getProduct();
-                                $sku = $product->getSKU();
-                                $stock = $product->getStock();
-                                $name = $product->getName();
-                                $price = $product->getPrice();
-                                $description = $product->getDescription();
-                                $img = "img/" . $sku . ".jpeg";
-                                $quantity = $cartItem->getQuantity();
-                        ?>
-                                <tr class="align-middle">
-                                    <div class="row">
-                                        <th scope="row"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="200px"></th>
-                                        <td>
-                                            <?= $name; ?>
-                                        </td>
-                                        <td>
-                                            Quantité: <input class="rounded ms-2" type="number" name="quantity" id="quantity" value="<?= $quantity; ?>" style="width: 50px;" min="1" max="<?= $stock; ?>">
-                                        </td>
-                                        <td>
-                                            Disponible : <span class="badge bg-primary"><?= $stock; ?></span>
-                                        </td>
-                                        <td>
-                                            <a href="product.php?sku=<?= $sku; ?>" class="btn btn-light float-end me-2">Voir l'item</a>
-                                            <a href="cart.php?delete=<?= $sku ?>" class="btn btn-danger float-end me-2">Supprimer</a>
-                                        </td>
-                                    </div>
+                            if (!$isCartEmpty) {
 
-                                </tr>
+
+                                foreach ($cart->getCartItems() as $cartItem) {
+                                    $product = $cartItem->getProduct();
+                                    $sku = $product->getSKU();
+                                    $stock = $product->getStock();
+                                    $name = $product->getName();
+                                    $price = $product->getPrice();
+                                    $description = $product->getDescription();
+                                    $img = "img/" . $sku . ".jpeg";
+                                    $quantity = $cartItem->getQuantity();
+                        ?>
+                                    <tr class="align-middle">
+                                        <div class="row">
+                                            <th scope="row"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="200px"></th>
+                                            <td>
+                                                <?= $name; ?>
+                                            </td>
+                                            <td>
+                                                <?= $price; ?> $
+
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-2 justify-end"><a href=""><span class="badge rounded-circle bg-primary">-</span></a></div>
+                                                    <div class="col-md-5"><input class="rounded ms-2" type="number" name="quantity" id="quantity" value="<?= $quantity; ?>" style="width: 50px;" min="1" max="<?= $stock; ?>"></div>
+                                                    <div class="col-md-2 justify-start"><a href=""><span class="badge rounded-circle bg-primary">+</span></a></div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <a href="product.php?sku=<?= $sku; ?>" class="btn btn-light float-end me-2">Voir l'item</a>
+                                                <a href="cart.php?delete=<?= $sku ?>" class="btn btn-danger float-end me-2">Supprimer</a>
+                                            </td>
+                                        </div>
+
+                                    </tr>
+                                <?php
+                                }
+                            } else {
+                                ?>
+
+
+                                <div class="col-md-12 alert alert-info text-center">
+                                    Le panier est vide.
+                                </div>
                         <?php
                             }
                         }
                         ?>
                     </tbody>
                 </table>
-                <input style="position: fixed; bottom: 50px;right:30px;" class="btn btn-primary btn-lg float-end" type="submit" value="Acheter ">
+                <?php
+                if (isset($_SESSION["email"])) {
+                ?>
+                    <input style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg float-end" type="submit" value="Acheter ">
+                <?php
+                } else {
+                ?>
+                    <a href="login.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Se connecter</a>
+                <?php
+                }
+                ?>
             </form>
         </div>
     </div>

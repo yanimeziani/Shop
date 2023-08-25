@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 body {
   font-family: Poppins, sans-serif;
+  accent-color: #81fbb8;
 }
 .gradient-1 {
   background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
