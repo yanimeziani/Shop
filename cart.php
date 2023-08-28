@@ -5,12 +5,12 @@ require_once 'class/cart.class.php';
 require_once 'class/userDAO.class.php';
 require_once 'class/productDAO.class.php';
 require_once 'includes/session.php';
-// Create cart if not created
+
 if (!isset($_SESSION["cart"])) {
     $cart = new Cart([]);
     $_SESSION["cart"] = serialize($cart);
 }
-// Add item to cart
+
 if (isset($_POST['quantity']) && isset($_POST['sku'])) {
     $quantity = $_POST['quantity'];
     $sku = $_POST['sku'];
@@ -21,7 +21,7 @@ if (isset($_POST['quantity']) && isset($_POST['sku'])) {
     $cart->addCartItem($cartItem);
     $_SESSION["cart"] = serialize($cart);
 }
-// Remove item from cart
+
 if (isset($_GET['delete']) && !empty($_GET['delete'])) {
     $sku = intval($_GET['delete']);
     $cart = unserialize($_SESSION["cart"]);
@@ -43,7 +43,7 @@ include 'includes/header.php';
         <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
             <h1 class="text-center">Panier</h1>
         </div>
-        <div class="col-md-10 mx-auto mt-3">
+        <div class="col-md-8 mx-auto mt-3">
             <form action="cart.php" method="POST">
                 <table class="table rounded-1">
                     <tbody>
@@ -65,7 +65,7 @@ include 'includes/header.php';
                         ?>
                                     <tr class="align-middle">
                                         <div class="row">
-                                            <th scope="row"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="200px"></th>
+                                            <th scope="row align-middle"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="100px"></th>
                                             <td>
                                                 <?= $name; ?>
                                             </td>

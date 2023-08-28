@@ -10,7 +10,7 @@ class User
     private $last_name;
     private $shipping_address;
 
-    public function __construct(int $id, string $email, string $password, string $first_name, string $last_name, string $shipping_address)
+    public function __construct($id, string $email, string $password, string $first_name, string $last_name, string $shipping_address)
     {
         $this->id = $id;
         $this->email = $email;

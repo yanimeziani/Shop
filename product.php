@@ -26,14 +26,14 @@ if (isset($_GET["sku"])) {
         <div class="col-md-12 gradient-1 text-light pt-1 mb-2">
             <h1 class="text-center"><?= $name; ?></h1>
         </div>
-        <div class="mx-auto col-md-8">
+        <div class="mx-auto col-md-6">
             <div class="card bg-light text-dark">
                 <div class="card-body">
                     <form action="cart.php" method="POST">
                         <div class="row p-2">
 
                             <div class="col-md-5">
-                                <img src="<?= $img; ?>" class="card-img-top rounded" alt="<?= $name; ?>">
+                                <img src="<?= $img; ?>" class="card-img-top rounded border-1 border-dark" alt="<?= $name; ?>">
                             </div>
                             <div class="col-md-7 p-4">
                                 <h4 class="card-title">Prix: <span class="badge bg-dark float-end"><?= $price; ?> $</span> </h4>
