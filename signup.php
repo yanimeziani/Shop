@@ -85,8 +85,6 @@ if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["ema
     </div>
 </div>
 
-</div>
-
 <?php
 include 'includes/footer.php';
 include 'includes/foot.php';

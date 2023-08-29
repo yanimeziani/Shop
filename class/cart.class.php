@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
+require_once "./db/db.php";
 require_once "class/cartItem.class.php";
-
+require_once "class/productDAO.class.php";
 
 class Cart
 {
@@ -32,7 +33,7 @@ class Cart
         return $totalQuantity;
     }
 
-    public function removeCartItemBySku(int $sku)
+    public function deleteCartItemBySku(int $sku)
     {
         $updatedCartItems = array_filter($this->cartItems, function ($cartItem) use ($sku) {
             return $cartItem->getProduct()->getSKU() !== $sku;
@@ -40,6 +41,26 @@ class Cart
 
         $this->cartItems = $updatedCartItems;
     }
+
+    public function removeCartItemBySku(int $sku)
+    {
+        foreach ($this->cartItems as $cartItem) {
+            if ($cartItem->getProduct()->getSKU() === $sku) {
+                $quantity = $cartItem->getQuantity();
+
+                if ($quantity > 1) {
+                    $cartItem->setQuantity($quantity - 1);
+                } else {
+                    $this->deleteCartItemBySku($sku);
+                }
+
+                return; // Stop the loop after handling one item
+            }
+        }
+    }
+
+
+
 
     public function addCartItem(CartItem $cartItem)
     {

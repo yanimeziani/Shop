@@ -53,8 +53,6 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     </div>
 </div>
 
-</div>
-
 <?php
 include 'includes/footer.php';
 include 'includes/foot.php';

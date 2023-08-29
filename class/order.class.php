@@ -6,11 +6,11 @@ class Cart
     private $user_id;
     private $creation_date;
 
-    public function __construct($id, $user_id, $creation_date)
+    public function __construct($id, $user_id)
     {
         $this->id = $id;
         $this->user_id = $user_id;
-        $this->creation_date = $creation_date;
+        $this->creation_date = date("Y-m-d H:i:s");
     }
 
     public function getId()
@@ -36,10 +36,5 @@ class Cart
     public function setUserId($user_id)
     {
         $this->user_id = $user_id;
-    }
-
-    public function setCreationDate($creation_date)
-    {
-        $this->creation_date = $creation_date;
     }
 }

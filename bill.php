@@ -4,6 +4,7 @@ require_once 'db/db.php';
 require_once 'class/cart.class.php';
 require_once 'class/userDAO.class.php';
 require_once 'class/productDAO.class.php';
+require_once 'class/orderDAO.class.php';
 require_once 'includes/session.php';
 
 if (!isset($_SESSION["cart"])) {
