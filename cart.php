@@ -66,14 +66,12 @@ include 'includes/header.php';
                     $cart = unserialize($_SESSION["cart"]);
                     if (isset($cart) && !empty($cart)) {
                         if (!$isCartEmpty) {
-
-
                             foreach ($cart->getCartItems() as $cartItem) {
                                 $product = $cartItem->getProduct();
                                 $sku = $product->getSKU();
                                 $stock = $product->getStock();
                                 $name = $product->getName();
-                                $price = $product->getPrice();
+                                $price = $product->getPrice() * $cartItem->getQuantity();
                                 $description = $product->getDescription();
                                 $img = "img/" . $sku . ".jpeg";
                                 $quantity = $cartItem->getQuantity();
@@ -86,10 +84,9 @@ include 'includes/header.php';
                                         </td>
                                         <td>
                                             <?= $price; ?> $
-
                                         </td>
                                         <td>
-                                            <p class="rounded ms-2"><a href="cart.php?remove=<?= $sku ?>"><span class="badge  bg-primary">-</span></a> <?= $quantity; ?> <a href="cart.php?add=<?= $sku ?>"><span class="badge bg-primary">+</span></a></p>
+                                            <a href="cart.php?remove=<?= $sku ?>"><span class="badge  bg-primary">-</span></a> <?= $quantity; ?> <a href="cart.php?add=<?= $sku ?>"><span class="badge bg-primary">+</span></a>
 
 
                                         </td>
@@ -104,8 +101,6 @@ include 'includes/header.php';
                             }
                         } else {
                             ?>
-
-
                             <div class="col-md-12 alert alert-info text-center">
                                 Le panier est vide.
                             </div>
@@ -130,9 +125,6 @@ include 'includes/header.php';
         </div>
     </div>
 </div>
-
-</div>
-
 <?php
 include 'includes/footer.php';
 include 'includes/foot.php';
