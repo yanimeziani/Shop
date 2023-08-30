@@ -21,7 +21,16 @@ class Cart
 
     public function getTotal()
     {
-        return null;
+        $total = 0;
+        foreach ($this->cartItems as $cartItem) {
+            $total += $cartItem->getTotal();
+        }
+        return $total;
+    }
+
+    public function getTotalWithTax()
+    {
+        return $this->getTotal() * 1.15;
     }
 
     public function getTotalQuantity()

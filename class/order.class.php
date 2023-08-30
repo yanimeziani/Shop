@@ -1,6 +1,6 @@
 <?php
 
-class Cart
+class Order
 {
     private $id;
     private $user_id;

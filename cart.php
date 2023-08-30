@@ -113,7 +113,7 @@ include 'includes/header.php';
             <?php
             if (isset($_SESSION["email"])) {
             ?>
-                <input style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg float-end" type="submit" value="Acheter ">
+                <a href="bill.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Facture</a>
             <?php
             } else {
             ?>
@@ -121,7 +121,6 @@ include 'includes/header.php';
             <?php
             }
             ?>
-            </form>
         </div>
     </div>
 </div>
