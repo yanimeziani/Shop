@@ -2,37 +2,35 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once '../class/cart.class.php';  // Replace with the actual path to your Cart class
+require_once '../class/cart.class.php';
+require_once '../class/cartItem.class.php';
+require_once '../class/product.class.php';
+require_once '../class/user.class.php';
+require_once '../class/userDAO.class.php';
 
 class CartTest extends TestCase
 {
 
-    // Test adding items to the cart
     public function testAddCartItem()
     {
         $cart = new Cart([]);
 
-        $product  = new Product("1", "Product", "Description", 10.00, 1); // Replace with your actual Product class
-        $cartItem = new CartItem($product, 2); // Replace with your actual CartItem class
+        $product  = new Product("1", "Product", "Description", 10.00, 1);
+        $cartItem = new CartItem($product, 2);
         $cart->addCartItem($cartItem);
-
         $this->assertCount(1, $cart->getCartItems());
     }
 
-    // Test removing items from the cart
     public function testRemoveCartItem()
     {
         $cart = new Cart([]);
 
-        $product  = new Product("1", "Product", "Description", 10.00, 1); // Replace with your actual Product class
-        $cartItem = new CartItem($product, 2); // Replace with your actual CartItem class
+        $product  = new Product("1", "Product", "Description", 10.00, 2);
+        $cartItem = new CartItem($product, 2);
         $cart->addCartItem($cartItem);
 
-        $cart->removeCartItemBySku($product->getSKU());
+        $cart->deleteCartItemBySku($product->getSKU());
 
         $this->assertCount(0, $cart->getCartItems());
     }
-
-    // Add more test methods for other Cart class methods as needed
-
 }

@@ -76,7 +76,14 @@ include 'includes/header.php';
                     <h2>Sous-Total : <span class="float-end"><?= $cart->getTotal(); ?>$</span></h2>
                     <h2>Total : <span class="float-end"><?= $cart->getTotalWithTax(); ?>$</span></h2>
                 </div>
-
+                <div class="col-md-12 bg-dark text-light rounded p-1 mt-1">
+                    <?php
+                    $userDAO = new UserDAO($conn);
+                    $user = $userDAO->getUserByEmail($_SESSION['email']);
+                    $address = $user->getShippingAddress();
+                    ?>
+                    <h2>Adresse de livraison : <span class="float-end"><?= $address; ?></span></h2>
+                </div>
             </div>
             <?php
             if (isset($_SESSION["email"])) {

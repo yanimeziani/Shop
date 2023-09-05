@@ -1,9 +1,9 @@
 <?php
 
 declare(strict_types=1);
-require_once "../db/db.php";
-require_once "../class/cartItem.class.php";
-require_once "../class/productDAO.class.php";
+include_once "db/db.php";
+include_once "class/cartItem.class.php";
+include_once "class/productDAO.class.php";
 
 class Cart
 {
