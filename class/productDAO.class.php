@@ -69,4 +69,28 @@ class ProductDAO
             return [];
         }
     }
+
+    public function updateProduct(Product $product)
+    {
+        try {
+            $req = $this->db->prepare("UPDATE products SET name = :name, description = :description, price = :price, stock = :stock WHERE sku = :sku");
+            $params = [
+                ':name' => $product->getName(),
+                ':description' => $product->getDescription(),
+                ':price' => $product->getPrice(),
+                ':stock' => $product->getStock(),
+                ':sku' => $product->getSKU()
+            ];
+            $req->execute($params);
+
+            if ($req->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Update failed: " . $e->getMessage();
+            return false;
+        }
+    }
 }

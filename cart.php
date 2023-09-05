@@ -78,7 +78,7 @@ include 'includes/header.php';
                     ?>
                                 <tr class="align-middle">
                                     <div class="row">
-                                        <th scope="row align-middle"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="100px"></th>
+                                        <th scope="row align-middle"><a href="product.php?sku=<?= $sku; ?>"><img src="<?= $img; ?>" alt="" class="img-thumbnail" width="100px"></a></th>
                                         <td>
                                             <?= $name; ?>
                                         </td>
@@ -87,11 +87,8 @@ include 'includes/header.php';
                                         </td>
                                         <td>
                                             <a href="cart.php?remove=<?= $sku ?>"><span class="badge  bg-primary">-</span></a> <?= $quantity; ?> <a href="cart.php?add=<?= $sku ?>"><span class="badge bg-primary">+</span></a>
-
-
                                         </td>
                                         <td>
-                                            <a href="product.php?sku=<?= $sku; ?>" class="btn btn-light float-end me-2">Voir l'item</a>
                                             <a href="cart.php?delete=<?= $sku ?>" class="btn btn-danger float-end me-2">Supprimer</a>
                                         </td>
                                     </div>
@@ -111,13 +108,17 @@ include 'includes/header.php';
                 </tbody>
             </table>
             <?php
-            if (isset($_SESSION["email"])) {
+            if (isset($_SESSION["email"]) && !$isCartEmpty) { // Si panier non vide et connecté
             ?>
                 <a href="bill.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Facture</a>
             <?php
-            } else {
+            } else if (!$isCartEmpty) { // Si panier non vide et non connecté
             ?>
                 <a href="login.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Se connecter</a>
+            <?php
+            } else { // Si panier vide et non connecté
+            ?>
+                <a href="index.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Acheter</a>
             <?php
             }
             ?>

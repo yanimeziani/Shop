@@ -30,7 +30,7 @@ class Cart
 
     public function getTotalWithTax()
     {
-        return $this->getTotal() * 1.15;
+        return round($this->getTotal() * 1.15, 2);
     }
 
     public function getTotalQuantity()

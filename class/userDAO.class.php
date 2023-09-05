@@ -5,16 +5,16 @@ include 'class/user.class.php';
 
 class UserDAO
 {
-    private $db;
+    private $pdo;
 
     public function __construct(PDO $conn)
     {
-        $this->db = $conn;
+        $this->pdo = $conn;
     }
 
     public function createUser(User $user)
     {
-        $req = $this->db->prepare("INSERT INTO users (email, password, first_name, last_name, shipping_address) VALUES (:email, :password, :first_name, :last_name, :shipping_address)");
+        $req = $this->pdo->prepare("INSERT INTO users (email, password, first_name, last_name, shipping_address) VALUES (:email, :password, :first_name, :last_name, :shipping_address)");
 
         $params = [
             ':email' => $user->getEmail(),
@@ -33,7 +33,7 @@ class UserDAO
 
     public function getUserByEmail(string $email)
     {
-        $req = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $req = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
 
         $params = [':email' => $email];
         $req->execute($params);
@@ -49,7 +49,7 @@ class UserDAO
 
     public function updateUser(User $user)
     {
-        $req = $this->db->prepare("UPDATE users SET email = :email, password = :password, first_name = :first_name, last_name = :last_name, shipping_address = :shipping_address WHERE id = :id");
+        $req = $this->pdo->prepare("UPDATE users SET email = :email, password = :password, first_name = :first_name, last_name = :last_name, shipping_address = :shipping_address WHERE id = :id");
 
         $params = [
             ':email' => $user->getEmail(),
@@ -69,7 +69,7 @@ class UserDAO
 
     public function deleteUser(string $email)
     {
-        $req = $this->db->prepare("DELETE FROM users WHERE email = :email");
+        $req = $this->pdo->prepare("DELETE FROM users WHERE email = :email");
 
         $params = [':email' => $email];
 
@@ -82,7 +82,7 @@ class UserDAO
 
     public function userExists(string $email)
     {
-        $req = $this->db->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $req = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
 
         $params = [':email' => $email];
         $req->execute($params);

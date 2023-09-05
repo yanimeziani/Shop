@@ -23,8 +23,6 @@ $isCartEmpty = empty($cart->getCartItems());
 
 include 'includes/head.php';
 include 'includes/header.php';
-
-
 ?>
 <div class="container-fluid mb-5">
     <div class="row">
@@ -40,10 +38,8 @@ include 'includes/header.php';
                         foreach ($cart->getCartItems() as $cartItem) {
                             $product = $cartItem->getProduct();
                             $sku = $product->getSKU();
-                            $stock = $product->getStock();
                             $name = $product->getName();
                             $price = $product->getPrice() * $cartItem->getQuantity();
-                            $description = $product->getDescription();
                             $img = "img/" . $sku . ".jpeg";
                             $quantity = $cartItem->getQuantity();
                 ?>
@@ -52,26 +48,21 @@ include 'includes/header.php';
                                     <div class="col-md-2">
                                         <img src="<?= $img; ?>" class="img-fluid" alt="Product image">
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-10 p-5">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <h2><?= $name; ?></h2>
                                             </div>
-                                            <div class="col-md-12">
-                                                <p><?= $description; ?></p>
+                                            <div class="col-md-6 text-end">
+                                                <p>Quantité : <?= $quantity; ?></p>
+                                                <p>Prix : <?= $price; ?>$</p>
                                             </div>
-                                            <div class="col-md-12">
-                                                <p class="float-end">Quantité : <?= $quantity; ?></p>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <p class="float-end">Prix : <?= $price; ?>$</p>
-                                            </div>
+                                            <hr>
                                         </div>
-
-
                                     </div>
+
                                 </div>
-                                <hr>
+
                             </div>
                 <?php
                         }
@@ -85,18 +76,19 @@ include 'includes/header.php';
                     <h2>Sous-Total : <span class="float-end"><?= $cart->getTotal(); ?>$</span></h2>
                     <h2>Total : <span class="float-end"><?= $cart->getTotalWithTax(); ?>$</span></h2>
                 </div>
-                <?php
-                if (isset($_SESSION["email"])) {
-                ?>
-                    <a href="checkout.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Payer</a>
-                <?php
-                } else {
-                ?>
-                    <a href="login.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Se connecter</a>
-                <?php
-                }
-                ?>
+
             </div>
+            <?php
+            if (isset($_SESSION["email"])) {
+            ?>
+                <a href="checkout.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Payer</a>
+            <?php
+            } else {
+            ?>
+                <a href="login.php" style="position: fixed; bottom: 65px;right:30px;" class="btn btn-primary btn-lg">Se connecter</a>
+            <?php
+            }
+            ?>
         </div>
     </div>
 
