@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require_once 'class/product.class.php';
+require_once '../class/product.class.php';
 
 class ProductDAO
 {
