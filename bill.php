@@ -33,8 +33,6 @@ include 'includes/header.php';
         </div>
         <div class="col-md-8 mx-auto mt-3 bg-body-tertiary p-2">
             <div class="row">
-
-
                 <?php
                 $cart = unserialize($_SESSION["cart"]);
                 if (isset($cart) && !empty($cart)) {
@@ -85,7 +83,6 @@ include 'includes/header.php';
                 ?>
                 <div class="col-md-12 bg-dark text-light rounded p-1 mt-1">
                     <h2>Sous-Total : <span class="float-end"><?= $cart->getTotal(); ?>$</span></h2>
-
                     <h2>Total : <span class="float-end"><?= $cart->getTotalWithTax(); ?>$</span></h2>
                 </div>
                 <?php
