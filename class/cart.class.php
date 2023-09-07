@@ -63,12 +63,10 @@ class Cart
                     $this->deleteCartItemBySku($sku);
                 }
 
-                return; // Stop the loop after handling one item
+                return;
             }
         }
     }
-
-
 
 
     public function addCartItem(CartItem $cartItem)
