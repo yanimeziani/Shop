@@ -6,8 +6,8 @@ include 'includes/header.php';
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center">Erreur 404 : Oups, une erreur à été détectée.</h1>
+        <div class="col-md-12 p-5">
+            <h1 class="text-center">Erreur 404 : Êtes-vous perdu ?</h1>
         </div>
     </div>
 </div>

@@ -16,7 +16,7 @@ class CartTest extends TestCase
         $cart = new Cart([]);
 
         $product  = new Product("1", "Product", "Description", 10.00, 1);
-        $cartItem = new CartItem($product, 2);
+        $cartItem = new CartItem($product, 1);
         $cart->addCartItem($cartItem);
         $this->assertCount(1, $cart->getCartItems());
     }
