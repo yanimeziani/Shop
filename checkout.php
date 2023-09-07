@@ -11,7 +11,6 @@ if (isset($_SESSION["email"])) {
         $cart = unserialize($_SESSION["cart"]);
         $isCartEmpty = empty($cart->getCartItems());
         if (!$isCartEmpty) {
-            // Create order items array
             $items = [];
             foreach ($cart->getCartItems() as $cartItem) {
                 $product = $cartItem->getProduct();
@@ -22,27 +21,22 @@ if (isset($_SESSION["email"])) {
                     'quantity' => $quantity
                 ];
             }
-            // Create order
             $orderDAO = new OrderDAO($conn);
             $userDAO = new UserDAO($conn);
             $userID = $userDAO->getUserByEmail($_SESSION['email'])->getId();
             $orderID = $orderDAO->createOrder($userID);
-            // Reduce stock in products
             $productDAO = new ProductDAO($conn);
             foreach ($items as $item) {
                 $product = $productDAO->getProductBySKU($item['sku']);
                 $product->setStock($product->getStock() - $item['quantity']);
                 $productDAO->updateProduct($product);
             }
-            //Create order items in db
             $orderItemDAO = new OrderItemDAO($conn);
             foreach ($items as $item) {
                 $orderItem = new OrderItem(null, $orderID, $item['sku'], $item['quantity']);
                 $orderItemDAO->create($orderItem);
             }
-            // Empty cart
             unset($_SESSION["cart"]);
-            // Redirect to index.php
             header("Location: index.php?message=Votre commande a été passée avec succès!");
             exit();
         } else {
